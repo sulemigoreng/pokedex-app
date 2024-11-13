@@ -12,3 +12,7 @@ export interface PokemonData {
     front_default: string;
   };
 }
+
+export interface TypeData {
+    name : string
+}
