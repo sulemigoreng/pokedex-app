@@ -4,8 +4,7 @@
 
 @font-face {
   font-family: 'PokemonPixel';
-  src: url('./fonts/pokemon_pixel_font.ttf') format('truetype'),
-  url('./fonts/pokemon_pixel_font.woff') format('woff');
+  src: url('./fonts/pokemon_pixel_font.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
