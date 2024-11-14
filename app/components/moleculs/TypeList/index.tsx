@@ -3,7 +3,7 @@ import { useFilter } from "@/app/context/FilterContext";
 import { TypeData } from "@/app/interface/interface";
 import getTypeList from "@/app/service/getTypeList";
 import { useEffect, useState } from "react";
-import { TypeBadge } from "../../atoms";
+import { Button, TypeBadge } from "../../atoms";
 
 export default function TypeList({ showFilter }: { showFilter: () => void }) {
     const { filter, changeFilter } = useFilter();
@@ -35,8 +35,8 @@ export default function TypeList({ showFilter }: { showFilter: () => void }) {
 
     return (
         <>
-            <button className="bg-red-600 p-2 rounded-lg text-white" onClick={setFilter}>Set Filter</button>
-            <button className="bg-white border border-red-600 p-2 rounded-lg text-red-600" onClick={clearFilter}>Clear Filter</button>
+            <Button className="bg-red-600 text-white" onClick={setFilter}>Set Filter</Button>
+            <Button className="bg-white border border-red-600 text-red-600" onClick={clearFilter}>Clear Filter</Button>
             {
                 typeFiltered ?
                     (

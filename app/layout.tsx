@@ -31,6 +31,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#DC0A2D] h-lvh`}
       >
+        <Image src="../bg-ball.svg" alt="pokemonLogo" width={300} height={300}
+          className="absolute top-[-10] left-0 z-[-1]" />
+        <Image src="../bg-tech.svg" alt="pokemonLogo" width={300} height={300}
+          className="absolute top-[-10] right-0 z-[-1] hidden sm:block" />
         <FilterProvider>
           <div className={`flex flex-col gap-4 text-white h-full p-8`}>
             <Link href="/">
