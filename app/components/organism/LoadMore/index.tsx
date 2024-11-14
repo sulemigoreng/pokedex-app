@@ -1,4 +1,4 @@
-import getPokemonList from "@/app/service/getPokemonList";
+import { getPokemonList } from "@/app/service/getPokemonList";
 import LoadMoreComponent from "./component";
 
 export default async function LoadMore() {

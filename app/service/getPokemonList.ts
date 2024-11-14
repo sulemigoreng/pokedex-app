@@ -1,6 +1,6 @@
 import { PokemonData } from "../interface/interface";
 
-export default async function getPokemonList({
+export async function getPokemonList({
     limit,
     offset,
 }: {
@@ -27,4 +27,18 @@ async function getSinglePokemon(pokemonName: string) {
 async function getEachPokemon(pokemon: PokemonData[]) {
     const arr = await Promise.all(pokemon.map(pokemon => getSinglePokemon(pokemon.name)))
     return arr
+}
+
+export async function getPokemonListByType({type} : {type : string[]}) {
+    const arr = await Promise.all(type.map(item => getSingleType(item)))
+    const arrFlat = arr.flat();
+    const arrOfPokemon = await getEachPokemon(arrFlat);
+    return arrOfPokemon;
+}
+
+async function getSingleType(typeName: string) {
+    const response = await fetch(`https://pokeapi.co/api/v2/type/${typeName}`);
+    const data = await response.json();
+    const pokemons = data.pokemon.map((item : {pokemon : any}) => item.pokemon); 
+    return pokemons;
 }
