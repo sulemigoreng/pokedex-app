@@ -1,7 +1,9 @@
-export default function Home() {
+import { FilterType, LoadMore } from "./components/organism";
+export default async function Home() {
   return (
-    <div>
-      Test
-    </div>
+    <>
+      <FilterType />
+      <LoadMore />
+    </>
   );
 }
