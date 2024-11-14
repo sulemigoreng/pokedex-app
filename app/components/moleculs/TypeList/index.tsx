@@ -27,10 +27,16 @@ export default function TypeList({ showFilter }: { showFilter: () => void }) {
         changeFilter(typeFiltered);
         showFilter();
     }
+    
+    const clearFilter = () => {
+        changeFilter([]);
+        showFilter();
+    }
 
     return (
         <>
             <button className="bg-red-600 p-2 rounded-lg text-white" onClick={setFilter}>Set Filter</button>
+            <button className="bg-white border border-red-600 p-2 rounded-lg text-red-600" onClick={clearFilter}>Clear Filter</button>
             {
                 typeFiltered ?
                     (
