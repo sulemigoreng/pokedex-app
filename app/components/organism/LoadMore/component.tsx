@@ -5,7 +5,7 @@ import { CardPokemon } from "../../moleculs";
 import { PokemonData } from "@/app/interface/interface";
 import { useFilter } from "@/app/context/FilterContext";
 import { getPokemonList, getPokemonListByType } from "@/app/service/getPokemonList";
-import { TypeBadge } from "../../atoms";
+import { Button, TypeBadge } from "../../atoms";
 
 interface LoadMoreComponentProps {
     initialData: PokemonData[];
@@ -45,7 +45,6 @@ export default function LoadMoreComponent({ initialData }: LoadMoreComponentProp
         <>
             <div className="grow bg-white rounded-xl text-black text-xl overflow-y-auto w-full p-4
                 flex flex-col gap-2 content-center">
-
                 {
                     filter.length > 0 && !isLoading ?
                         <div className="flex flex-col w-full gap-2
@@ -77,12 +76,9 @@ export default function LoadMoreComponent({ initialData }: LoadMoreComponentProp
             </div>
             {
                 filter.length > 0 ? ""
-                    : <button
-                        onClick={fetchMore}
-                        className="p-2 rounded-lg bg-black bg-opacity-10 text-white font-bold"
-                    >
+                    : <Button onClick={() => fetchMore} className="bg-black bg-opacity-10 text-white font-bold">
                         Load More
-                    </button>
+                    </Button>
             }
         </>
     )
