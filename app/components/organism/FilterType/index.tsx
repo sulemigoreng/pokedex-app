@@ -17,7 +17,7 @@ export default function FilterType() {
                             <h2>Filter Pokédex</h2>
                             <div onClick={() => setShowFilter(!showFilter)} className="cursor-pointer">X</div>
                         </div>
-                        <TypeList />
+                        <TypeList showFilter={() => setShowFilter(!showFilter)} />
                     </div>
                 </>
             )}

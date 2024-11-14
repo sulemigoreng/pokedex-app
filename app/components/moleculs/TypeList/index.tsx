@@ -1,11 +1,11 @@
 'use client'
-import { typeColors } from "@/app/const";
 import { useFilter } from "@/app/context/FilterContext";
 import { TypeData } from "@/app/interface/interface";
 import getTypeList from "@/app/service/getTypeList";
 import { useEffect, useState } from "react";
+import { TypeBadge } from "../../atoms";
 
-export default function TypeList() {
+export default function TypeList({ showFilter }: { showFilter: () => void }) {
     const { filter, changeFilter } = useFilter();
 
     const [typeData, setTypeData] = useState([]);
@@ -20,43 +20,52 @@ export default function TypeList() {
     };
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, [typeFiltered])
 
     const setFilter = () => {
-        changeFilter(typeFiltered)
+        changeFilter(typeFiltered);
+        showFilter();
     }
 
     return (
         <>
-            <button className="bg-red-600" onClick={setFilter}>Set Filter</button>
-            <div className="flex flex-row w-full flex-wrap gap-2 cursor-pointer">
-                {
-                    typeFiltered ?
-                        typeFiltered.map((item: string, index: number) => {
-                            return (
-                                <div className="p-2 rounded-lg text-white text-sm" key={index} style={{
-                                    backgroundColor: typeColors[item as keyof typeof typeColors] || '#000000'
-                                }} onClick={() => setTypeFiltered(prev => prev.filter(f => f !== item))}>
-                                    {item}
-                                </div>
-                            )
-                        }) : ''
-                }
-            </div>
-            <div className="flex flex-row w-full flex-wrap gap-2 cursor-pointer">
-                {
-                    typeData ?
-                        typeData.map((item: TypeData, index: number) => {
-                            return (
-                                <div className="p-2 rounded-lg text-white text-sm" key={index} style={{
-                                    backgroundColor: typeColors[item.name as keyof typeof typeColors] || '#000000'
-                                }} onClick={() => setTypeFiltered(prev => [...prev, item.name])}>
-                                    {item.name}
-                                </div>
-                            )
-                        }) : 'Loading'
-                }
+            <button className="bg-red-600 p-2 rounded-lg text-white" onClick={setFilter}>Set Filter</button>
+            {
+                typeFiltered ?
+                    (
+                        <div className="flex flex-col w-full gap-2
+                            bg-black bg-opacity-5 p-4 rounded-md">
+                            <h3 className="text-xs">Active Filter : </h3>
+                            <div className="flex flex-row flex-wrap gap-2">
+                                {typeFiltered.map((item: string, index: number) => {
+                                    return (
+                                        <TypeBadge type={item} key={index}
+                                            onClick={() => setTypeFiltered(prev => prev.filter(f => f !== item))}
+                                            className={`text-lg cursor-pointer`}
+                                        />
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    ) : ''
+            }
+            <div className="flex flex-col w-full gap-2
+                            bg-black bg-opacity-5 p-4 rounded-md">
+                <h3 className="text-xs">Available Filter : </h3>
+                <div className="flex flex-row flex-wrap gap-2">
+                    {
+                        typeData ?
+                            typeData.map((item: TypeData, index: number) => {
+                                return (
+                                    <TypeBadge type={item.name} key={index}
+                                        onClick={() => setTypeFiltered(prev => [...prev, item.name])}
+                                        className={`text-lg cursor-pointer`}
+                                    />
+                                )
+                            }) : 'Loading'
+                    }
+                </div>
             </div>
         </>
     )

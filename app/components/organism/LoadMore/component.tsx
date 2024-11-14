@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { CardPokemon } from "../../moleculs";
 import { PokemonData } from "@/app/interface/interface";
 import { useFilter } from "@/app/context/FilterContext";
-import { typeColors } from "@/app/const";
 import { getPokemonList, getPokemonListByType } from "@/app/service/getPokemonList";
+import { TypeBadge } from "../../atoms";
 
 interface LoadMoreComponentProps {
     initialData: PokemonData[];
@@ -38,26 +38,28 @@ export default function LoadMoreComponent({ initialData }: LoadMoreComponentProp
         const response = await getPokemonList({ offset: offset });
         setOffset((prev) => prev + 15);
         const results = await response;
-        setItems((prev: any) => [...prev, ...results]);
+        setItems((prev) => [...prev, ...results]);
     };
 
     return (
         <>
             <div className="grow bg-white rounded-xl text-black text-xl overflow-y-auto w-full p-4
-                flex flex-col gap-4">
+                flex flex-col gap-2 content-center">
+
                 {
                     filter.length > 0 && !isLoading ?
-                        <div className="flex flex-row gap-4">
-                            <h2>Showing results for :</h2>
-                            {filter.map((item, index) => {
-                                return (
-                                    <div className="p-2 rounded-lg text-white text-sm" key={index} style={{
-                                        backgroundColor: typeColors[item as keyof typeof typeColors] || '#000000'
-                                    }}>
-                                        {item.toUpperCase()}
-                                    </div>
-                                )
-                            })}
+                        <div className="flex flex-col w-full gap-2
+                            bg-black bg-opacity-5 p-4 rounded-lg">
+                            <h2 className="text-lg">Showing all pokemon with type :</h2>
+                            <div className="flex flex-row flex-wrap gap-2">
+                                {filter.map((item, index) => {
+                                    return (
+                                        <TypeBadge type={item} key={index}
+                                            className={`text-lg`}
+                                        />
+                                    )
+                                })}
+                            </div>
                         </div> : ''
                 }
                 <div className="flex flex-wrap gap-2 w-full relative">
@@ -68,17 +70,20 @@ export default function LoadMoreComponent({ initialData }: LoadMoreComponentProp
                                     <CardPokemon item={item} key={index} />
                                 )
                             })
-                            : "Loading..."
+                            : isLoading ? "Loading..." : "No Pokemon Found"
                     }
                 </div>
 
             </div>
-            <button
-                onClick={fetchMore}
-                className="p-2 rounded-lg bg-black bg-opacity-10 text-white font-bold"
-            >
-                Load More
-            </button>
+            {
+                filter.length > 0 ? ""
+                    : <button
+                        onClick={fetchMore}
+                        className="p-2 rounded-lg bg-black bg-opacity-10 text-white font-bold"
+                    >
+                        Load More
+                    </button>
+            }
         </>
     )
 }
