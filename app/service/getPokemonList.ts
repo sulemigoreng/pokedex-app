@@ -39,6 +39,6 @@ export async function getPokemonListByType({type} : {type : string[]}) {
 async function getSingleType(typeName: string) {
     const response = await fetch(`https://pokeapi.co/api/v2/type/${typeName}`);
     const data = await response.json();
-    const pokemons = data.pokemon.map((item : {pokemon : any}) => item.pokemon); 
+    const pokemons = data.pokemon.map((item : {pokemon : {name : string, url: string}}) => item.pokemon); 
     return pokemons;
 }
