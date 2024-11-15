@@ -1,4 +1,4 @@
-import { typeColors } from "@/app/const";
+import { BASE_URL, typeColors } from "@/app/const";
 import { PokemonData } from "@/app/interface/interface";
 import { capFirst, padStr } from "@/app/utils/string";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default async function DetailPage({ params }: { params: Promise<{ id: number }> }) {
     const id = (await params).id;
-    const response: PokemonData = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(res => res.json())
+    const response: PokemonData = await fetch(`${BASE_URL}/pokemon/${id}`).then(res => res.json())
 
     return (
         <>
