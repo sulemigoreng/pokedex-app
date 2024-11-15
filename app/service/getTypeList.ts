@@ -1,6 +1,8 @@
+import { BASE_URL } from "../const";
+
 export default async function getTypeList() {
     const res = await fetch(
-        `https://pokeapi.co/api/v2/type`,
+        `${BASE_URL}/type`,
     );
 
     if (!res.ok) {
