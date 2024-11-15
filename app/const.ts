@@ -18,3 +18,5 @@ export const typeColors = {
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
 };
+
+export const BASE_URL = 'https://pokeapi.co/api/v2/';
