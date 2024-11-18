@@ -76,7 +76,7 @@ export default function LoadMoreComponent({ initialData }: LoadMoreComponentProp
             </div>
             {
                 filter.length > 0 ? ""
-                    : <Button onClick={() => fetchMore} className="bg-black bg-opacity-10 text-white font-bold">
+                    : <Button onClick={fetchMore} className="bg-black bg-opacity-10 text-white font-bold">
                         Load More
                     </Button>
             }
