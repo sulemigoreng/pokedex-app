@@ -3,6 +3,7 @@ import { PokemonData } from "@/app/interface/interface";
 import { capFirst, padStr } from "@/app/utils/string";
 import Image from "next/image";
 import Link from "next/link";
+import "./style.css";
 
 export default async function DetailPage({ params }: { params: Promise<{ id: number }> }) {
     const id = (await params).id;
@@ -13,8 +14,7 @@ export default async function DetailPage({ params }: { params: Promise<{ id: num
             <Link href="/" className="font-bold">
                 &lt; Go Back
             </Link>
-            <div className="grow bg-white rounded-xl text-black text-xl overflow-y-auto w-full p-4
-                flex flex-col gap-4 content-center font-pixel">
+            <div className="customClass">
                 <div className="min-h-52 w-full flex justify-center rounded-lg relative"
                     style={{
                         backgroundColor: typeColors[response.types[0].type.name as keyof typeof typeColors] || '#000000'
